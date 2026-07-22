@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# SQLite 데이터베이스 (실데이터는 커밋하지 않음)
+*.db
+*.sqlite
+*.sqlite3
+
+# 환경변수 / 비밀값
+.env
+.env.*
+
+# OS / 에디터
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
