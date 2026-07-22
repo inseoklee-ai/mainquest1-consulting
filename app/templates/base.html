@@ -17,7 +17,17 @@
       <nav class="nav">
         <a href="/apply">신청하기</a>
         <a href="/my">내 신청 내역</a>
-        <a class="nav__cta" href="/apply">지금 신청 →</a>
+        {% if user %}
+          <span class="nav__user">{{ user }}</span>
+          <form method="post" action="/logout" class="nav__logout">
+            <button type="submit" class="nav__linkbtn">로그아웃</button>
+          </form>
+        {% elif auth_enabled %}
+          <a href="/login">로그인</a>
+          <a class="nav__cta" href="/signup">회원가입</a>
+        {% else %}
+          <a class="nav__cta" href="/apply">지금 신청 →</a>
+        {% endif %}
       </nav>
     </div>
   </header>

@@ -134,3 +134,22 @@ def test_타인_내역_비노출_부분일치():
     services.create_application("shared@a.com", "010-5555-0001")
     rows = services.find_applications("shared@a.com", "010-5555-9999")
     assert rows == []
+
+
+# ---------- 로그인 사용자 조회 (이메일 기준, add-supabase-auth) ----------
+def test_이메일_기준_조회는_해당_이메일만():
+    services.create_application("login@a.com", "010-6666-0001")
+    services.create_application("other@a.com", "010-6666-0002")
+    rows = services.find_applications_by_email("login@a.com")
+    assert len(rows) == 1
+    assert rows[0]["email"] == "login@a.com"
+
+
+def test_이메일_기준_조회_정규화_적용():
+    services.create_application("Case@A.com", "010-6666-0003")
+    rows = services.find_applications_by_email("  CASE@a.COM ")
+    assert len(rows) == 1
+
+
+def test_이메일_기준_조회_없으면_빈리스트():
+    assert services.find_applications_by_email("nobody@a.com") == []

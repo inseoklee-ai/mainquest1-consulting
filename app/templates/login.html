@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}로그인 · 중소기업 AI 도입 컨설팅{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="form-wrap">
+    <div class="form-head">
+      <h1>로그인</h1>
+      <p class="muted">로그인하면 이메일·휴대폰 재입력 없이 <strong>내 신청 내역</strong>을 볼 수 있어요.</p>
+    </div>
+
+    {% if message %}
+      <div class="alert alert--{{ message_type }}">{{ message }}</div>
+    {% endif %}
+
+    <form class="form card" method="post" action="/login">
+      <div class="field">
+        <label for="email">이메일</label>
+        <input id="email" type="email" name="email" placeholder="you@example.com"
+               value="{{ email or '' }}" required>
+      </div>
+      <div class="field">
+        <label for="password">비밀번호</label>
+        <input id="password" type="password" name="password" placeholder="비밀번호" required>
+      </div>
+      <button class="btn btn--primary btn--block btn--lg" type="submit">로그인</button>
+    </form>
+
+    <p class="muted center small">계정이 없으신가요? <a href="/signup">회원가입</a></p>
+    <p class="muted center small">로그인 없이도 <a href="/apply">신청</a>하거나 <a href="/my">내역 조회</a>가 가능합니다.</p>
+  </div>
+</section>
+{% endblock %}

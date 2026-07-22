@@ -4,10 +4,15 @@
 <section class="section">
   <div class="form-wrap">
     <div class="form-head">
-      <h1>내 신청 내역 조회</h1>
-      <p class="muted">신청할 때 입력한 이메일과 휴대폰번호를 <strong>모두</strong> 입력해주세요.</p>
+      <h1>내 신청 내역</h1>
+      {% if user %}
+        <p class="muted"><strong>{{ user }}</strong> 계정으로 로그인 중입니다. 이 계정 이메일로 접수된 신청을 보여드려요.</p>
+      {% else %}
+        <p class="muted">신청할 때 입력한 이메일과 휴대폰번호를 <strong>모두</strong> 입력해주세요.</p>
+      {% endif %}
     </div>
 
+    {% if not user %}
     <form class="form card" method="post" action="/my">
       <div class="field">
         <label for="email">이메일</label>
@@ -21,6 +26,7 @@
       </div>
       <button class="btn btn--primary btn--block btn--lg" type="submit">조회하기</button>
     </form>
+    {% endif %}
 
     {% if searched %}
       <div class="result">

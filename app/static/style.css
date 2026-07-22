@@ -78,6 +78,10 @@ strong { color: var(--ink); }
   border-radius: 999px; font-weight: 600;
 }
 .nav__cta:hover { background: var(--indigo-700); }
+.nav__user { color: var(--muted); font-size: .9rem; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nav__logout { margin: 0; }
+.nav__linkbtn { background: none; border: none; padding: 0; color: var(--body); font: inherit; font-size: .95rem; font-weight: 500; cursor: pointer; }
+.nav__linkbtn:hover { color: var(--indigo-600); }
 
 /* ---------- Hero ---------- */
 .hero {

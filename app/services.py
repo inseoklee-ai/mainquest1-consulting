@@ -123,3 +123,18 @@ def find_applications(email: str, phone: str) -> list[dict]:
         return [dict(r) for r in rows]
     finally:
         conn.close()
+
+
+def find_applications_by_email(email: str) -> list[dict]:
+    """로그인 사용자용: 검증된 이메일 기준 조회 (휴대폰 불필요, design D3)."""
+    email_n = normalize_email(email)
+    conn = get_connection()
+    try:
+        rows = conn.execute(
+            "SELECT email, phone, week_key, created_at FROM applications "
+            "WHERE email = ? ORDER BY created_at DESC;",
+            (email_n,),
+        ).fetchall()
+        return [dict(r) for r in rows]
+    finally:
+        conn.close()
