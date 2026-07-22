@@ -14,6 +14,7 @@ env/
 # 환경변수 / 비밀값
 .env
 .env.*
+!.env.example
 
 # OS / 에디터
 .DS_Store
