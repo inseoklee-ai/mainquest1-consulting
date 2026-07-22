@@ -1,0 +1,13 @@
+# Render 배포 설정 (Blueprint)
+# 사용법: Render 대시보드 → New → Blueprint → 이 저장소 선택
+services:
+  - type: web
+    name: mainquest1-consulting
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      # 개발은 3.14였지만 Render 호환을 위해 배포는 3.12로 고정
+      - key: PYTHON_VERSION
+        value: "3.12.7"
