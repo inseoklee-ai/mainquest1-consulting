@@ -4,23 +4,33 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}중소기업 AI 도입 컨설팅 신청{% endblock %}</title>
+  <meta name="description" content="회원가입 없이 이메일·휴대폰번호만으로 신청하는 중소기업 AI 도입 컨설팅. 매주 4명 한정.">
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="/">🤖 AI 도입 컨설팅</a>
-    <nav>
-      <a href="/apply">신청하기</a>
-      <a href="/my">내 신청 내역</a>
-    </nav>
+    <div class="site-header__inner">
+      <a class="brand" href="/">
+        <span class="brand__mark">AI</span>
+        <span class="brand__name">중소기업 AI 도입 컨설팅</span>
+      </a>
+      <nav class="nav">
+        <a href="/apply">신청하기</a>
+        <a href="/my">내 신청 내역</a>
+        <a class="nav__cta" href="/apply">지금 신청 →</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="container">
+  <main>
     {% block content %}{% endblock %}
   </main>
 
   <footer class="site-footer">
-    <p>중소기업 AI 도입 컨설팅 · MainQuest1</p>
+    <div class="site-footer__inner">
+      <p class="site-footer__brand">중소기업 AI 도입 컨설팅</p>
+      <p class="site-footer__meta">MainQuest1 · 자원이 부족한 중소기업의 AI 도입을 돕습니다</p>
+    </div>
   </footer>
 </body>
 </html>

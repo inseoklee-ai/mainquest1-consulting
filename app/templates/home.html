@@ -1,20 +1,48 @@
 {% extends "base.html" %}
 {% block content %}
 <section class="hero">
-  <h1>중소기업 AI 도입 컨설팅 신청</h1>
-  <p class="lead">
-    인력도 자금도 늘 빠듯한 중소기업 대표님을 위한 AI 도입 컨설팅.
-    <strong>회원가입 없이</strong> 이메일과 휴대폰번호만 남기면 신청됩니다.
-  </p>
-  <div class="cta-row">
-    <a class="btn btn-primary" href="/apply">지금 신청하기</a>
-    <a class="btn btn-ghost" href="/my">내 신청 내역 보기</a>
+  <div class="hero__inner">
+    <span class="badge">매주 4명 한정 · 회원가입 불필요</span>
+    <h1 class="hero__title">복잡한 AI 도입,<br>첫 걸음부터 함께합니다</h1>
+    <p class="hero__lead">
+      인력도 자금도 늘 빠듯한 중소기업 대표님을 위한 AI 도입 컨설팅.
+      이메일과 휴대폰번호만 남기면 <strong>30초 만에</strong> 신청됩니다.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn--primary btn--lg" href="/apply">지금 신청하기</a>
+      <a class="btn btn--ghost btn--lg" href="/my">내 신청 내역 보기</a>
+    </div>
   </div>
 </section>
 
-<section class="points">
-  <div class="point"><h3>로그인 불필요</h3><p>이메일·휴대폰번호 2개만 입력, 30초 신청</p></div>
-  <div class="point"><h3>주 4명 한정</h3><p>매주 정원 4명, 감당 가능한 만큼만 접수</p></div>
-  <div class="point"><h3>내 내역 확인</h3><p>언제든 신청 상태를 다시 확인</p></div>
+<section class="section">
+  <div class="cards">
+    <article class="card">
+      <div class="card__icon">📝</div>
+      <h3 class="card__title">로그인 불필요</h3>
+      <p class="card__desc">이메일·휴대폰번호 2개만 입력하면 끝. 가입 절차로 시간 낭비하지 않습니다.</p>
+    </article>
+    <article class="card">
+      <div class="card__icon">📅</div>
+      <h3 class="card__title">주 4명 한정</h3>
+      <p class="card__desc">매주 정원 4명. 감당 가능한 만큼만 정성껏 상담합니다.</p>
+    </article>
+    <article class="card">
+      <div class="card__icon">🔎</div>
+      <h3 class="card__title">내 내역 확인</h3>
+      <p class="card__desc">이메일·휴대폰번호로 언제든 내 신청 상태를 다시 확인할 수 있습니다.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section band">
+  <div class="band__inner">
+    <h2 class="band__title">"할 일은 대기업만큼, 사람과 돈은 부족한" 현실</h2>
+    <p class="band__desc">
+      중소기업의 가장 큰 애로사항은 자원 부족입니다. AI 도입은 그 격차를 메우는
+      가장 현실적인 방법입니다. 어디서부터 시작할지 막막하다면, 신청 한 번으로 시작해보세요.
+    </p>
+    <a class="btn btn--primary btn--lg" href="/apply">컨설팅 신청하기</a>
+  </div>
 </section>
 {% endblock %}
