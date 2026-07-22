@@ -159,6 +159,16 @@ strong { color: var(--ink); }
 .alert--success { background: var(--success-bg); color: var(--success-fg); border: 1px solid var(--success-line); }
 .alert--error   { background: var(--error-bg);   color: var(--error-fg);   border: 1px solid var(--error-line); }
 
+/* ---------- Application list (내 신청 내역) ---------- */
+.app-list { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 12px; }
+.app-item {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); padding: 16px 18px; box-shadow: var(--shadow-sm);
+}
+.app-item__row { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; font-size: .95rem; }
+.app-item__row span { color: var(--muted); }
+.app-item__row strong { color: var(--ink); text-align: right; word-break: break-all; }
+
 /* ---------- Footer ---------- */
 .site-footer { border-top: 1px solid var(--line); background: var(--surface); margin-top: 40px; }
 .site-footer__inner { max-width: var(--maxw); margin: 0 auto; padding: 28px 20px; text-align: center; }

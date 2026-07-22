@@ -18,5 +18,13 @@ cd C:\Users\lis29\MainQuest1
 - 상태확인: http://localhost:8020/health
 - 자동 API 문서: http://localhost:8020/docs
 
+## 테스트 실행
+```powershell
+cd C:\Users\lis29\MainQuest1
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m pytest -v
+```
+스펙 시나리오(형식 검증·중복 차단·주 4명 정원·동시성·내역 조회)를 자동 검증합니다.
+
 ## 종료
 터미널에서 `Ctrl + C`

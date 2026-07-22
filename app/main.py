@@ -1,9 +1,10 @@
 """중소기업 AI 도입 컨설팅 신청 - FastAPI 진입점.
 
-4단계: 화면(신청/조회) 뼈대까지.
-- 실제 저장·중복 차단·주 정원 로직은 6단계에서 붙인다.
-- 지금은 폼이 정상적으로 보이고, 전송(POST)이 동작하는지까지 확인한다.
+6단계: 저장 + 정원 로직 연결.
+- SQLite 저장, 형식 검증, 중복 차단, 주 4명 정원(동시성 안전)
+- 내 신청 내역 조회 (이메일+휴대폰 둘 다 일치)
 """
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, Form, Request
@@ -11,65 +12,68 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-# 주당 정원 (design.md D0/D3, spec 참조) — 한 곳에 모아둔다.
-WEEKLY_CAPACITY = 4
+from .db import init_db
+from .services import WEEKLY_CAPACITY, create_application, find_applications
 
 BASE_DIR = Path(__file__).resolve().parent
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
-app = FastAPI(title="중소기업 AI 도입 컨설팅 신청")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """앱 시작 시 DB 테이블/인덱스 준비."""
+    init_db()
+    yield
+
+
+app = FastAPI(title="중소기업 AI 도입 컨설팅 신청", lifespan=lifespan)
 app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+
+
+# 신청 결과 status -> 화면 알림 종류
+_STATUS_ALERT = {"ok": "success", "duplicate": "error", "full": "error", "invalid": "error"}
 
 
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
-    """홈 화면."""
     return templates.TemplateResponse(request, "home.html")
 
 
 @app.get("/health")
 def health() -> dict:
-    """서비스 상태 확인용 엔드포인트."""
     return {"status": "ok", "weekly_capacity": WEEKLY_CAPACITY}
 
 
 @app.get("/apply", response_class=HTMLResponse)
 def apply_form(request: Request):
-    """신청 화면(폼) 보여주기."""
     return templates.TemplateResponse(request, "apply.html")
 
 
 @app.post("/apply", response_class=HTMLResponse)
 def apply_submit(request: Request, email: str = Form(...), phone: str = Form(...)):
-    """신청 폼 전송 처리 (4단계: 화면 동작 확인용 임시 응답).
-
-    TODO(6단계): 형식 검증 → 중복 차단 → 주 정원 확인 후 저장.
-    """
+    result = create_application(email, phone)
+    # 성공 시엔 입력값을 지워 다시 제출 실수를 줄인다.
+    keep = result["status"] != "ok"
     return templates.TemplateResponse(
         request,
         "apply.html",
         {
-            "email": email,
-            "phone": phone,
-            "message": f"입력을 받았습니다 (이메일: {email}, 휴대폰: {phone}). "
-                       "실제 저장·정원 처리는 다음 단계에서 붙입니다.",
-            "message_type": "info",
+            "email": email if keep else "",
+            "phone": phone if keep else "",
+            "message": result["message"],
+            "message_type": _STATUS_ALERT.get(result["status"], "info"),
         },
     )
 
 
 @app.get("/my", response_class=HTMLResponse)
 def my_form(request: Request):
-    """내 신청 내역 조회 화면(폼) 보여주기."""
     return templates.TemplateResponse(request, "my.html")
 
 
 @app.post("/my", response_class=HTMLResponse)
 def my_lookup(request: Request, email: str = Form(...), phone: str = Form(...)):
-    """조회 폼 전송 처리 (4단계: 화면 동작 확인용 임시 응답).
-
-    TODO(6단계): 이메일+휴대폰 둘 다 일치하는 신청 내역 조회.
-    """
+    applications = find_applications(email, phone)
     return templates.TemplateResponse(
         request,
         "my.html",
@@ -77,7 +81,6 @@ def my_lookup(request: Request, email: str = Form(...), phone: str = Form(...)):
             "email": email,
             "phone": phone,
             "searched": True,
-            "message": "조회 화면이 동작합니다. 실제 신청 내역 조회는 다음 단계에서 붙입니다.",
-            "message_type": "info",
+            "applications": applications,
         },
     )

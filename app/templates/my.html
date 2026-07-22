@@ -24,8 +24,20 @@
 
     {% if searched %}
       <div class="result">
-        {% if message %}
-          <div class="alert alert--{{ message_type }}">{{ message }}</div>
+        {% if applications %}
+          <div class="alert alert--success">신청 내역 {{ applications|length }}건을 찾았습니다.</div>
+          <ul class="app-list">
+            {% for a in applications %}
+              <li class="app-item">
+                <div class="app-item__row"><span>이메일</span><strong>{{ a.email }}</strong></div>
+                <div class="app-item__row"><span>휴대폰</span><strong>{{ a.phone }}</strong></div>
+                <div class="app-item__row"><span>신청 주</span><strong>{{ a.week_key }} 주</strong></div>
+                <div class="app-item__row"><span>신청 일시</span><strong>{{ a.created_at }}</strong></div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <div class="alert alert--info">해당 이메일·휴대폰번호로 접수된 신청 내역이 없습니다.</div>
         {% endif %}
       </div>
     {% endif %}
