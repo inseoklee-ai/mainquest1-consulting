@@ -20,8 +20,8 @@
 
 ## 진행 상태
 - [x] 0. 스펙 작성 (OpenSpec)
-- [ ] 1. GitHub 저장소 + 스펙 업로드
-- [ ] 2. PRD(기획 문서) 작성
+- [x] 1. GitHub 저장소 + 스펙 업로드
+- [x] 2. PRD(기획 문서) 작성 → [docs/PRD.md](docs/PRD.md)
 - [ ] 3. 프로젝트 뼈대 (FastAPI + SQLite)
 - [ ] 4. 화면 만들기
 - [ ] 5. 화면 다듬기 (디자인)
