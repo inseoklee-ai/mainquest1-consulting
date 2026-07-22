@@ -25,3 +25,14 @@ Render 무료 플랜은 디스크가 **임시**라서, 재배포·재시작 시 
 
 ## 무료 플랜 특성
 - 일정 시간 요청이 없으면 서버가 잠자기(sleep) 상태가 되어, 첫 접속이 느릴 수 있습니다(수십 초). 정상입니다.
+
+## 로그인(Supabase) 사용 시 — 환경변수 등록
+로그인 기능을 배포본에서도 켜려면, Render 대시보드에서 환경변수를 등록해야 합니다.
+1. Render → 웹 서비스(mainquest1-consulting) → 왼쪽 **Environment**
+2. 아래 3개를 **Add Environment Variable** 로 추가 (값은 로컬 `.env`와 동일):
+   - `SUPABASE_URL`
+   - `SUPABASE_ANON_KEY`
+   - `SESSION_SECRET`
+3. 저장하면 자동 재배포됩니다.
+> 환경변수를 등록하지 않으면 배포본은 `AUTH_ENABLED=false`가 되어, 로그인 없이 신청/조회만 동작합니다(기존 흐름은 그대로 유지).
+> Supabase 대시보드에서 이메일 확인(Confirm email)을 OFF로 두어야 데모 로그인이 매끄럽습니다.
