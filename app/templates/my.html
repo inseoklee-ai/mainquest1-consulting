@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}내 신청 내역 · 중소기업 AI 도입 컨설팅{% endblock %}
+{% block content %}
+<section class="form-section">
+  <h1>내 신청 내역 조회</h1>
+  <p class="lead">신청할 때 입력한 이메일과 휴대폰번호를 모두 입력해주세요.</p>
+
+  <form class="form" method="post" action="/my">
+    <label>
+      이메일
+      <input type="email" name="email" placeholder="you@example.com"
+             value="{{ email or '' }}" required>
+    </label>
+    <label>
+      휴대폰번호
+      <input type="tel" name="phone" placeholder="010-1234-5678"
+             value="{{ phone or '' }}" required>
+    </label>
+    <button class="btn btn-primary" type="submit">조회하기</button>
+  </form>
+
+  {% if searched %}
+    <div class="result">
+      {% if message %}
+        <div class="alert alert-{{ message_type }}">{{ message }}</div>
+      {% endif %}
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

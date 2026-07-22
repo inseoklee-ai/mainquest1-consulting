@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}중소기업 AI 도입 컨설팅 신청{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">🤖 AI 도입 컨설팅</a>
+    <nav>
+      <a href="/apply">신청하기</a>
+      <a href="/my">내 신청 내역</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <p>중소기업 AI 도입 컨설팅 · MainQuest1</p>
+  </footer>
+</body>
+</html>

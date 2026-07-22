@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}신청하기 · 중소기업 AI 도입 컨설팅{% endblock %}
+{% block content %}
+<section class="form-section">
+  <h1>컨설팅 신청</h1>
+  <p class="lead">이메일과 휴대폰번호를 남겨주시면 순서대로 연락드립니다. (매주 정원 4명)</p>
+
+  {% if message %}
+    <div class="alert alert-{{ message_type }}">{{ message }}</div>
+  {% endif %}
+
+  <form class="form" method="post" action="/apply">
+    <label>
+      이메일
+      <input type="email" name="email" placeholder="you@example.com"
+             value="{{ email or '' }}" required>
+    </label>
+    <label>
+      휴대폰번호
+      <input type="tel" name="phone" placeholder="010-1234-5678"
+             value="{{ phone or '' }}" required>
+    </label>
+    <button class="btn btn-primary" type="submit">신청하기</button>
+  </form>
+</section>
+{% endblock %}
