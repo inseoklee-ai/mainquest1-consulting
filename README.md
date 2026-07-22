@@ -22,7 +22,7 @@
 - [x] 0. 스펙 작성 (OpenSpec)
 - [x] 1. GitHub 저장소 + 스펙 업로드
 - [x] 2. PRD(기획 문서) 작성 → [docs/PRD.md](docs/PRD.md)
-- [ ] 3. 프로젝트 뼈대 (FastAPI + SQLite)
+- [x] 3. 프로젝트 뼈대 (FastAPI) — `app/main.py`, 서버 기동 확인 (`/`, `/health`, `/docs`)
 - [ ] 4. 화면 만들기
 - [ ] 5. 화면 다듬기 (디자인)
 - [ ] 6. 저장 + 정원 로직
